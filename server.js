@@ -9,6 +9,9 @@ const apiRoutes = require('./routes/api.js');
 const fccTestingRoutes = require('./routes/fcctesting.js');
 const runner = require('./test-runner');
 
+const ConvertHandler = require('./controllers/convertHandler.js');
+const converter = new ConvertHandler();
+
 let app = express();
 
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -23,6 +26,17 @@ app.route('/')
   .get(function (req, res) {
     res.sendFile(process.cwd() + '/views/index.html');
   });
+
+app.route('/api/convert').get((req, res) => {
+  const { input } = req.query;
+  try {
+    const output = converter.getNum(input);
+  } catch {
+    res.send('Invalid Number');
+    return;
+  }
+  res.send(String(output));
+})
 
 //For FCC testing purposes
 fccTestingRoutes(app);
