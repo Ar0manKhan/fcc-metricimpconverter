@@ -31,11 +31,11 @@ app.route('/api/convert').get((req, res) => {
   const { input } = req.query;
   try {
     const output = converter.getNum(input);
+    res.send(String(output));
   } catch {
     res.send('Invalid Number');
     return;
   }
-  res.send(String(output));
 })
 
 //For FCC testing purposes
