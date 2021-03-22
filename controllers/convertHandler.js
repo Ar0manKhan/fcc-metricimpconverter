@@ -1,5 +1,16 @@
 function ConvertHandler() {
 
+  // Object that includes all supported units.
+  const short_units = {
+    kilogram: 'kg',
+    pound: 'lbs',
+    gallon: 'gal',
+    litre: 'l',
+    mile: 'mi',
+    kilometer: 'km'
+  }
+
+
   this.getNum = function (input) {
     // Extracting number from input
     let result = input.match(/[0-9./]+/g);
@@ -30,21 +41,19 @@ function ConvertHandler() {
     result = input.match(/[a-z]+/gi);
 
     // Checking for multiple units, and if found then throw 
-    // an error else get unit from array.
+    // an error else get unit from array and convert to lowercase.
     if (result.length > 1)
       throw Error;
     else
-      result = result[0];
+      result = result[0].toLowerCase();
 
-    // Checking for invalid unit, if found then throuw an error.
-    // If valid unit is found then return it from the predefined
-    // valid unit array, to avoid bugs caused by different letter case.
-    const valid_units = ['kg', 'lbs', 'gal', 'l', 'mi', 'km', 'kilogram', 'pound', 'gallon', 'litre', 'mile', 'kilometer'];
-    const result_index = valid_units.indexOf(result.toLowerCase());
-    if (result_index > -1)
-      result = valid_units[result_index % 6];
+    // Checking if given unit is valid or not.
+    if (short_units[result])
+      result = short_units[result];
+    else if (Object.values(short_units).includes(result)) { }
     else
-      throw Error("Invalid unit.")
+      throw Error;
+
     return result;
   };
 
