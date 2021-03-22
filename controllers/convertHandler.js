@@ -26,6 +26,25 @@ function ConvertHandler() {
   this.getUnit = function (input) {
     let result;
 
+    // Extracting units in the form of array from input
+    result = input.match(/[a-z]+/gi);
+
+    // Checking for multiple units, and if found then throw 
+    // an error else get unit from array.
+    if (result.length > 1)
+      throw Error;
+    else
+      result = result[0];
+
+    // Checking for invalid unit, if found then throuw an error.
+    // If valid unit is found then return it from the predefined
+    // valid unit array, to avoid bugs caused by different letter case.
+    const valid_units = ['kg', 'lbs', 'gal', 'l', 'mi', 'km', 'kilogram', 'pound', 'gallon', 'litre', 'mile', 'kilometer'];
+    const result_index = valid_units.indexOf(result.toLowerCase());
+    if (result_index > -1)
+      result = valid_units[result_index % 6];
+    else
+      throw Error("Invalid unit.")
     return result;
   };
 

@@ -30,10 +30,10 @@ app.route('/')
 app.route('/api/convert').get((req, res) => {
   const { input } = req.query;
   try {
-    const output = converter.getNum(input);
+    const output = converter.getUnit(input);
     res.send(String(output));
   } catch {
-    res.send('Invalid Number');
+    res.send('Invalid unit.');
     return;
   }
 })
