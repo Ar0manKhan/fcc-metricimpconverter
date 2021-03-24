@@ -47,6 +47,10 @@ function ConvertHandler() {
     else
       result = result[0];
 
+    // Converting every unit to lowercase to avoid case sensitive
+    // result except "L". 
+    result = result === "L" ? "L" : result.toLowerCase();
+
     // Checking if given unit is valid or not.
     if (short_units[result])
       result = short_units[result];
