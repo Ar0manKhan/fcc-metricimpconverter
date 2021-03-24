@@ -5,7 +5,7 @@ function ConvertHandler() {
     kilogram: 'kg',
     pound: 'lbs',
     gallon: 'gal',
-    litre: 'l',
+    litre: 'L',
     mile: 'mi',
     kilometer: 'km'
   }
@@ -45,7 +45,7 @@ function ConvertHandler() {
     if (result.length > 1)
       throw Error;
     else
-      result = result[0].toLowerCase();
+      result = result[0];
 
     // Checking if given unit is valid or not.
     if (short_units[result])
@@ -60,8 +60,8 @@ function ConvertHandler() {
   this.getReturnUnit = function (initUnit) {
     let result;
     const return_units = {
-      'gal': 'l',
-      'l': 'gal',
+      'gal': 'L',
+      'L': 'gal',
       'mi': 'km',
       'km': 'mi',
       'lbs': 'kg',
