@@ -109,4 +109,18 @@ suite('Unit Tests', function () {
 			assert.throw(() => getUnit('43'));
 		})
 	})
+
+	suite('getReturnUnit test', function () {
+		const getReturnUnit = convertHandler.getReturnUnit;
+
+		// #1
+		test('Return unit for valid units', function () {
+			assert.equal(getReturnUnit('mi'), 'km');
+			assert.equal(getReturnUnit('km'), 'mi');
+			assert.equal(getReturnUnit('L'), 'gal');
+			assert.equal(getReturnUnit('gal'), 'L');
+			assert.equal(getReturnUnit('lbs'), 'kg');
+			assert.equal(getReturnUnit('kg'), 'lbs');
+		})
+	})
 })
