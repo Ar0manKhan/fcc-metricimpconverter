@@ -55,4 +55,58 @@ suite('Unit Tests', function () {
 			assert.throw(() => getNum('1-2kg'));
 		})
 	})
+
+	suite('getUnit test', function () {
+		const getUnit = convertHandler.getUnit;
+
+		// #1
+		test('Return unit for kilogram', function () {
+			assert.equal(getUnit('15kg'), 'kg');
+			assert.equal(getUnit('1.2 kilogram'), 'kg');
+			assert.equal(getUnit('0.5Kg'), 'kg');
+		})
+
+		// #2
+		test('Return unit for pound', function () {
+			assert.equal(getUnit('1/2lbs'), 'lbs');
+			assert.equal(getUnit('2pound'), 'lbs');
+			assert.equal(getUnit('15Lbs'), 'lbs');
+		})
+
+		// #3
+		test('Return unit for litre', function () {
+			assert.equal(getUnit('4L'), 'L');
+			assert.equal(getUnit('10litre'), 'L');
+			assert.equal(getUnit('0.45Litre'), 'L');
+		})
+
+		// #4
+		test('Return unit for gallon', function () {
+			assert.equal(getUnit('1.2gal'), 'gal');
+			assert.equal(getUnit('1.4Gal'), 'gal');
+			assert.equal(getUnit('1/4gallon'), 'gal');
+		})
+
+		// #5
+		test('Return unit for kilometer', function () {
+			assert.equal(getUnit('km'), 'km');
+			assert.equal(getUnit('12kilometer'), 'km');
+			assert.equal(getUnit('5 KM'), 'km');
+		})
+
+		// #6
+		test('Return unit for mile', function () {
+			assert.equal(getUnit('1.9mi'), 'mi');
+			assert.equal(getUnit('3mile'), 'mi');
+			assert.equal(getUnit('1/2MI'), 'mi');
+		})
+
+		// #7
+		test('Throw error for invalid units', function () {
+			assert.throw(() => getUnit('1 mil'));
+			assert.throw(() => getUnit('12l'));
+			assert.throw(() => getUnit('5 mi kg'));
+			assert.throw(() => getUnit('43'));
+		})
+	})
 })
