@@ -59,49 +59,49 @@ suite('Unit Tests', function () {
 	suite('getUnit test', function () {
 		const getUnit = convertHandler.getUnit;
 
-		// #1
+		// #8
 		test('Return unit for kilogram', function () {
 			assert.equal(getUnit('15kg'), 'kg');
 			assert.equal(getUnit('1.2 kilogram'), 'kg');
 			assert.equal(getUnit('0.5Kg'), 'kg');
 		})
 
-		// #2
+		// #9
 		test('Return unit for pound', function () {
 			assert.equal(getUnit('1/2lbs'), 'lbs');
 			assert.equal(getUnit('2pound'), 'lbs');
 			assert.equal(getUnit('15Lbs'), 'lbs');
 		})
 
-		// #3
+		// #10
 		test('Return unit for litre', function () {
 			assert.equal(getUnit('4L'), 'L');
 			assert.equal(getUnit('10litre'), 'L');
 			assert.equal(getUnit('0.45Litre'), 'L');
 		})
 
-		// #4
+		// #11
 		test('Return unit for gallon', function () {
 			assert.equal(getUnit('1.2gal'), 'gal');
 			assert.equal(getUnit('1.4Gal'), 'gal');
 			assert.equal(getUnit('1/4gallon'), 'gal');
 		})
 
-		// #5
+		// #12
 		test('Return unit for kilometer', function () {
 			assert.equal(getUnit('km'), 'km');
 			assert.equal(getUnit('12kilometer'), 'km');
 			assert.equal(getUnit('5 KM'), 'km');
 		})
 
-		// #6
+		// #13
 		test('Return unit for mile', function () {
 			assert.equal(getUnit('1.9mi'), 'mi');
 			assert.equal(getUnit('3mile'), 'mi');
 			assert.equal(getUnit('1/2MI'), 'mi');
 		})
 
-		// #7
+		// #14
 		test('Throw error for invalid units', function () {
 			assert.throw(() => getUnit('1 mil'));
 			assert.throw(() => getUnit('12l'));
@@ -113,7 +113,7 @@ suite('Unit Tests', function () {
 	suite('getReturnUnit test', function () {
 		const getReturnUnit = convertHandler.getReturnUnit;
 
-		// #1
+		// #15
 		test('Return unit for valid units', function () {
 			assert.equal(getReturnUnit('mi'), 'km');
 			assert.equal(getReturnUnit('km'), 'mi');
@@ -121,6 +121,26 @@ suite('Unit Tests', function () {
 			assert.equal(getReturnUnit('gal'), 'L');
 			assert.equal(getReturnUnit('lbs'), 'kg');
 			assert.equal(getReturnUnit('kg'), 'lbs');
+		})
+	})
+
+	suite('spellOutUnit test', function () {
+		const spellOutUnit = convertHandler.spellOutUnit;
+
+		// #16
+		test('Spell out for valid units', function () {
+			assert.equal(spellOutUnit('kg'), 'kilogram');
+			assert.equal(spellOutUnit('lbs'), 'pound');
+			assert.equal(spellOutUnit('L'), 'litre');
+			assert.equal(spellOutUnit('gal'), 'gallon');
+			assert.equal(spellOutUnit('km'), 'kilometer');
+			assert.equal(spellOutUnit('mi'), 'mile');
+		})
+
+		// #17
+		test('Spellout undefined for invalid units', function () {
+			assert.isUndefined(spellOutUnit('cm'));
+			assert.isUndefined(spellOutUnit('v'));
 		})
 	})
 })

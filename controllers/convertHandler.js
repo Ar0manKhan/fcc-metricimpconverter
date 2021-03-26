@@ -77,9 +77,15 @@ function ConvertHandler() {
 	};
 
 	this.spellOutUnit = function (unit) {
-		let result;
-
-		return result;
+		let result = {
+			L: 'litre',
+			gal: 'gallon',
+			kg: 'kilogram',
+			lbs: 'pound',
+			km: 'kilometer',
+			mi: 'mile'
+		};
+		return result[unit];
 	};
 
 	this.convert = function (initNum, initUnit) {
