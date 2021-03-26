@@ -22,7 +22,7 @@ suite('Unit Tests', function () {
 		// #3
 		test('Fractional testing', function () {
 			assert.equal(getNum('1/2mi'), 0.5);
-			assert.equal(getNum('2/3lbs'), 0.667);
+			assert.equal(getNum('2/3lbs'), 0.66667);
 			assert.notEqual(getNum('1/3L'), 0.3);
 		})
 
@@ -74,10 +74,10 @@ suite('Unit Tests', function () {
 		})
 
 		// #10
-		test('Return unit for litre', function () {
+		test('Return unit for liter', function () {
 			assert.equal(getUnit('4L'), 'L');
-			assert.equal(getUnit('10litre'), 'L');
-			assert.equal(getUnit('0.45Litre'), 'L');
+			assert.equal(getUnit('10liter'), 'L');
+			assert.equal(getUnit('0.45liter'), 'L');
 		})
 
 		// #11
@@ -131,7 +131,7 @@ suite('Unit Tests', function () {
 		test('Spell out for valid units', function () {
 			assert.equal(spellOutUnit('kg'), 'kilogram');
 			assert.equal(spellOutUnit('lbs'), 'pound');
-			assert.equal(spellOutUnit('L'), 'litre');
+			assert.equal(spellOutUnit('L'), 'liter');
 			assert.equal(spellOutUnit('gal'), 'gallon');
 			assert.equal(spellOutUnit('km'), 'kilometer');
 			assert.equal(spellOutUnit('mi'), 'mile');
@@ -141,6 +141,20 @@ suite('Unit Tests', function () {
 		test('Spellout undefined for invalid units', function () {
 			assert.isUndefined(spellOutUnit('cm'));
 			assert.isUndefined(spellOutUnit('v'));
+		})
+	})
+
+	suite('convert method test', function () {
+		const convert = convertHandler.convert;
+
+		// #18
+		test('Convert value correctly', function () {
+			assert.equal(convert(1.9, 'gal'), 7.192);
+			assert.equal(convert(5, 'L'), 1.321);
+			assert.equal(convert(9.2, 'lbs'), 4.173);
+			assert.equal(convert(2.112, 'kg'), 4.656);
+			assert.equal(convert(8, 'mi'), 12.875);
+			assert.equal(convert(5.7, 'km'), 3.542);
 		})
 	})
 })

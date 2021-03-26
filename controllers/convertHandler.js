@@ -5,7 +5,7 @@ function ConvertHandler() {
 		kilogram: 'kg',
 		pound: 'lbs',
 		gallon: 'gal',
-		litre: 'L',
+		liter: 'L',
 		mile: 'mi',
 		kilometer: 'km'
 	}
@@ -31,7 +31,7 @@ function ConvertHandler() {
 			throw Error('Invalid Number');
 
 		// Returning evaluated value, to avoid future errors and calculations.
-		return eval(result).toFixed(3);
+		return eval(result).toFixed(5);
 	};
 
 	this.getUnit = function (input) {
@@ -78,7 +78,7 @@ function ConvertHandler() {
 
 	this.spellOutUnit = function (unit) {
 		let result = {
-			L: 'litre',
+			L: 'liter',
 			gal: 'gallon',
 			kg: 'kilogram',
 			lbs: 'pound',
@@ -93,8 +93,30 @@ function ConvertHandler() {
 		const lbsToKg = 0.453592;
 		const miToKm = 1.60934;
 		let result;
+		switch (initUnit) {
+			case 'gal':
+				result = initNum * galToL;
+				break;
+			case 'L':
+				result = initNum / galToL;
+				break;
+			case 'lbs':
+				result = initNum * lbsToKg;
+				break;
+			case 'kg':
+				result = initNum / lbsToKg;
+				break;
+			case 'mi':
+				result = initNum * miToKm;
+				break;
+			case 'km':
+				result = initNum / miToKm;
+				break;
+			default:
+				break;
+		}
 
-		return result;
+		return result.toFixed(3);
 	};
 
 	this.getString = function (initNum, initUnit, returnNum, returnUnit) {
