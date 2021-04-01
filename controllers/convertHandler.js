@@ -1,16 +1,5 @@
 function ConvertHandler() {
 
-	// Object that includes all supported units.
-	const short_units = {
-		kilogram: 'kg',
-		pound: 'lbs',
-		gallon: 'gal',
-		liter: 'L',
-		mile: 'mi',
-		kilometer: 'km'
-	}
-
-
 	this.getNum = function (input) {
 		// Extracting number from input
 		let result = input.match(/[0-9./]+/g);
@@ -36,6 +25,17 @@ function ConvertHandler() {
 
 	this.getUnit = function (input) {
 		let result;
+
+		// Object that includes all supported units.
+		const short_units = {
+			kilogram: 'kg',
+			pound: 'lbs',
+			gallon: 'gal',
+			liter: 'L',
+			mile: 'mi',
+			kilometer: 'km'
+		}
+
 
 		// Extracting units in the form of array from input
 		result = input.match(/[a-z]+/gi);
@@ -78,12 +78,12 @@ function ConvertHandler() {
 
 	this.spellOutUnit = function (unit) {
 		let result = {
-			L: 'liter',
-			gal: 'gallon',
-			kg: 'kilogram',
-			lbs: 'pound',
-			km: 'kilometer',
-			mi: 'mile'
+			L: 'liters',
+			gal: 'gallons',
+			kg: 'kilograms',
+			lbs: 'pounds',
+			km: 'kilometers',
+			mi: 'miles'
 		};
 		return result[unit];
 	};
@@ -121,7 +121,6 @@ function ConvertHandler() {
 
 	this.getString = function (initNum, initUnit, returnNum, returnUnit) {
 		let result;
-
 		return result;
 	};
 

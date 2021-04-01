@@ -23,11 +23,33 @@ app.use(express.urlencoded({ extended: true }));
 
 //Index page (static HTML)
 app.route('/')
-	.get(function (req, res) {
+	.get(function (_req, res) {
 		res.sendFile(process.cwd() + '/views/index.html');
 	});
 
-app.route('/api/convert').get((req, res) => { })
+app.route('/api/convert').get((req, res) => {
+	const { input } = req.query;
+
+	// extracting number from input
+	let input_number;
+	try {
+		input_number = converter.getNum(input);
+	} catch (_e) { }
+
+	// extracting unit from input
+	let input_unit;
+	try {
+		input_unit = converter.getUnit(input);
+	} catch (_e) { }
+
+	// Solving error case
+	if (!input_number && !input_unit) res.send("invalid number and unit");
+	else if (!input_number) res.send("invalid number");
+	else if (!input_unit) res.send("invalid unit");
+	else {
+		res.send('Hey');
+	}
+})
 
 //For FCC testing purposes
 fccTestingRoutes(app);

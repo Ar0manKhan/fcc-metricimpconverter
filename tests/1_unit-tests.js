@@ -129,12 +129,12 @@ suite('Unit Tests', function () {
 
 		// #16
 		test('Spell out for valid units', function () {
-			assert.equal(spellOutUnit('kg'), 'kilogram');
-			assert.equal(spellOutUnit('lbs'), 'pound');
-			assert.equal(spellOutUnit('L'), 'liter');
-			assert.equal(spellOutUnit('gal'), 'gallon');
-			assert.equal(spellOutUnit('km'), 'kilometer');
-			assert.equal(spellOutUnit('mi'), 'mile');
+			assert.equal(spellOutUnit('kg'), 'kilograms');
+			assert.equal(spellOutUnit('lbs'), 'pounds');
+			assert.equal(spellOutUnit('L'), 'liters');
+			assert.equal(spellOutUnit('gal'), 'gallons');
+			assert.equal(spellOutUnit('km'), 'kilometers');
+			assert.equal(spellOutUnit('mi'), 'miles');
 		})
 
 		// #17
