@@ -31,23 +31,26 @@ app.route('/api/convert').get((req, res) => {
 	const { input } = req.query;
 
 	// extracting number from input
-	let input_number;
+	let initNum;
 	try {
-		input_number = converter.getNum(input);
+		initNum = converter.getNum(input);
 	} catch (_e) { }
 
 	// extracting unit from input
-	let input_unit;
+	let initUnit;
 	try {
-		input_unit = converter.getUnit(input);
+		initUnit = converter.getUnit(input);
 	} catch (_e) { }
 
 	// Solving error case
-	if (!input_number && !input_unit) res.send("invalid number and unit");
-	else if (!input_number) res.send("invalid number");
-	else if (!input_unit) res.send("invalid unit");
+	if (!initNum && !initUnit) res.send("invalid number and unit");
+	else if (!initNum) res.send("invalid number");
+	else if (!initUnit) res.send("invalid unit");
 	else {
-		res.send('Hey');
+		const returnNum = converter.convert(initNum, initUnit);
+		const returnUnit = converter.getReturnUnit(initUnit);
+		const string = converter.getString(initNum, initUnit, returnNum, returnUnit);
+		res.json({ initNum, initUnit, returnNum, returnUnit, string });
 	}
 })
 

@@ -36,7 +36,6 @@ function ConvertHandler() {
 			kilometer: 'km'
 		}
 
-
 		// Extracting units in the form of array from input
 		result = input.match(/[a-z]+/gi);
 
