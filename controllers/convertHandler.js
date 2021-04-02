@@ -20,7 +20,7 @@ function ConvertHandler() {
 			throw Error('Invalid Number');
 
 		// Returning evaluated value, to avoid future errors and calculations.
-		return eval(result).toFixed(5);
+		return Number(eval(result).toFixed(5));
 	};
 
 	this.getUnit = function (input) {
