@@ -104,7 +104,6 @@ suite('Unit Tests', function () {
 		// #14
 		test('Throw error for invalid units', function () {
 			assert.throw(() => getUnit('1 mil'));
-			assert.throw(() => getUnit('12l'));
 			assert.throw(() => getUnit('5 mi kg'));
 			assert.throw(() => getUnit('43'));
 		})
@@ -149,12 +148,12 @@ suite('Unit Tests', function () {
 
 		// #18
 		test('Convert value correctly', function () {
-			assert.equal(convert(1.9, 'gal'), 7.192);
-			assert.equal(convert(5, 'L'), 1.321);
-			assert.equal(convert(9.2, 'lbs'), 4.173);
-			assert.equal(convert(2.112, 'kg'), 4.656);
-			assert.equal(convert(8, 'mi'), 12.875);
-			assert.equal(convert(5.7, 'km'), 3.542);
+			assert.equal(convert(1.9, 'gal'), 7.19228);
+			assert.equal(convert(5, 'L'), 1.32086);
+			assert.equal(convert(9.2, 'lbs'), 4.17305);
+			assert.equal(convert(2.112, 'kg'), 4.65617);
+			assert.equal(convert(8, 'mi'), 12.87472);
+			assert.equal(convert(5.7, 'km'), 3.54182);
 		})
 	})
 

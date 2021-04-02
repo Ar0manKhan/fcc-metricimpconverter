@@ -31,7 +31,7 @@ function ConvertHandler() {
 			kilogram: 'kg',
 			pound: 'lbs',
 			gallon: 'gal',
-			liter: 'L',
+			liter: 'l',
 			mile: 'mi',
 			kilometer: 'km'
 		}
@@ -44,11 +44,11 @@ function ConvertHandler() {
 		if (result.length > 1)
 			throw Error;
 		else
-			result = result[0];
+			result = result[0].toLowerCase();
 
 		// Converting every unit to lowercase to avoid case sensitive
 		// result except "L". 
-		result = result === "L" ? "L" : result.toLowerCase();
+		// result = result === "L" ? "L" : result.toLowerCase();
 
 		// Checking if given unit is valid or not.
 		if (short_units[result])
@@ -57,7 +57,7 @@ function ConvertHandler() {
 		else
 			throw Error;
 
-		return result;
+		return result === 'l' ? 'L' : result;
 	};
 
 	this.getReturnUnit = function (initUnit) {
@@ -115,7 +115,7 @@ function ConvertHandler() {
 				break;
 		}
 
-		return Number(result.toFixed(3));
+		return Number(result.toFixed(5));
 	};
 
 	this.getString = function (initNum, initUnit, returnNum, returnUnit) {
