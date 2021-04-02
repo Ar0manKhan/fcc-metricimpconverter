@@ -120,7 +120,12 @@ function ConvertHandler() {
 	};
 
 	this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-		let result;
+		const convert = new ConvertHandler();
+		let result = '';
+		result += initNum + ' ';
+		result += convert.spellOutUnit(initUnit) + ' converts to ';
+		result += returnNum + ' ';
+		result += convert.spellOutUnit(returnUnit);
 		return result;
 	};
 

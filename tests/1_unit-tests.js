@@ -157,4 +157,24 @@ suite('Unit Tests', function () {
 			assert.equal(convert(5.7, 'km'), 3.542);
 		})
 	})
+
+	suite('getString method test', function () {
+		const getString = convertHandler.getString;
+
+		// #19
+		test('Get string correctly', function () {
+			assert.equal(getString(1.9, 'gal', 7.192, 'L'),
+				"1.9 gallons converts to 7.192 liters");
+			assert.equal(getString(5, 'L', 1.321, 'gal'),
+				"5 liters converts to 1.321 gallons");
+			assert.equal(getString(9.2, 'lbs', 4.173, 'kg'),
+				"9.2 pounds converts to 4.173 kilograms");
+			assert.equal(getString(2.112, 'kg', 4.656, 'lbs'),
+				"2.112 kilograms converts to 4.656 pounds");
+			assert.equal(getString(8, 'mi', 12.875, 'km'),
+				"8 miles converts to 12.875 kilometers");
+			assert.equal(getString(5.7, 'km', 3.542, 'mi'),
+				"5.7 kilometers converts to 3.542 miles");
+		})
+	})
 })
