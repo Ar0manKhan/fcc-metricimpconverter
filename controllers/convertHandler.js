@@ -115,7 +115,7 @@ function ConvertHandler() {
 				break;
 		}
 
-		return result.toFixed(3);
+		return Number(result.toFixed(3));
 	};
 
 	this.getString = function (initNum, initUnit, returnNum, returnUnit) {
