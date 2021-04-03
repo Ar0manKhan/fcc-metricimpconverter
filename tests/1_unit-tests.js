@@ -27,6 +27,12 @@ suite('Unit Tests', function () {
 		})
 
 		// #4
+		test('Double-fractional error testing', function() {
+			assert.throw(() => getNum('1/2.3/2kg'));
+			assert.throw(() => getNum('3/2.1/1mi'));
+		});
+
+		// #5
 		test('Decimal and fractional testing', function () {
 			assert.equal(getNum('1.2/3gal'), 0.4);
 			assert.equal(getNum('1/0.25L'), 4);
@@ -36,83 +42,37 @@ suite('Unit Tests', function () {
 			assert.notEqual(getNum('45.2/1.2mi'), 37.7);
 		})
 
-		// #5
-		test('Error on double fraction', function () {
-			assert.throw(() => getNum('1/2/3kg'));
-			assert.throw(() => getNum('1.2//'));
-		})
-
 		// #6
 		test('1 as input if no number provided', function () {
 			assert.equal(getNum('kg'), 1);
 			assert.notEqual(getNum('mi'), 0);
-		})
-
-		// #7
-		test('Few more case which should throw error.', function () {
-			assert.throw(() => getNum('0.0.kg'));
-			assert.throw(() => getNum('1 2kg'));
-			assert.throw(() => getNum('1-2kg'));
 		})
 	})
 
 	suite('getUnit test', function () {
 		const getUnit = convertHandler.getUnit;
 
+		// #7
+		test('Correctly read each valid unit', function () {
+			assert.equal(getUnit('32.4kg'), 'kg');
+			assert.equal(getUnit('5.1lbs'), 'lbs');
+			assert.equal(getUnit('12km'), 'km');
+			assert.equal(getUnit('33mi'), 'mi');
+			assert.equal(getUnit('12L'), 'L');
+			assert.equal(getUnit('4.12gal'), 'gal');
+		});
+
 		// #8
-		test('Return unit for kilogram', function () {
-			assert.equal(getUnit('15kg'), 'kg');
-			assert.equal(getUnit('1.2 kilogram'), 'kg');
-			assert.equal(getUnit('0.5Kg'), 'kg');
-		})
-
-		// #9
-		test('Return unit for pound', function () {
-			assert.equal(getUnit('1/2lbs'), 'lbs');
-			assert.equal(getUnit('2pound'), 'lbs');
-			assert.equal(getUnit('15Lbs'), 'lbs');
-		})
-
-		// #10
-		test('Return unit for liter', function () {
-			assert.equal(getUnit('4L'), 'L');
-			assert.equal(getUnit('10liter'), 'L');
-			assert.equal(getUnit('0.45liter'), 'L');
-		})
-
-		// #11
-		test('Return unit for gallon', function () {
-			assert.equal(getUnit('1.2gal'), 'gal');
-			assert.equal(getUnit('1.4Gal'), 'gal');
-			assert.equal(getUnit('1/4gallon'), 'gal');
-		})
-
-		// #12
-		test('Return unit for kilometer', function () {
-			assert.equal(getUnit('km'), 'km');
-			assert.equal(getUnit('12kilometer'), 'km');
-			assert.equal(getUnit('5 KM'), 'km');
-		})
-
-		// #13
-		test('Return unit for mile', function () {
-			assert.equal(getUnit('1.9mi'), 'mi');
-			assert.equal(getUnit('3mile'), 'mi');
-			assert.equal(getUnit('1/2MI'), 'mi');
-		})
-
-		// #14
-		test('Throw error for invalid units', function () {
-			assert.throw(() => getUnit('1 mil'));
-			assert.throw(() => getUnit('5 mi kg'));
-			assert.throw(() => getUnit('43'));
-		})
-	})
+		test('Correctly throw error for invalid unit', function() {
+			assert.throw(() => getUnit('3gall'));
+			assert.throw(() => getUnit('3 kg mi'));
+		});
+	});
 
 	suite('getReturnUnit test', function () {
 		const getReturnUnit = convertHandler.getReturnUnit;
 
-		// #15
+		// #9
 		test('Return unit for valid units', function () {
 			assert.equal(getReturnUnit('mi'), 'km');
 			assert.equal(getReturnUnit('km'), 'mi');
@@ -126,7 +86,7 @@ suite('Unit Tests', function () {
 	suite('spellOutUnit test', function () {
 		const spellOutUnit = convertHandler.spellOutUnit;
 
-		// #16
+		// #10
 		test('Spell out for valid units', function () {
 			assert.equal(spellOutUnit('kg'), 'kilograms');
 			assert.equal(spellOutUnit('lbs'), 'pounds');
@@ -135,45 +95,39 @@ suite('Unit Tests', function () {
 			assert.equal(spellOutUnit('km'), 'kilometers');
 			assert.equal(spellOutUnit('mi'), 'miles');
 		})
-
-		// #17
-		test('Spellout undefined for invalid units', function () {
-			assert.isUndefined(spellOutUnit('cm'));
-			assert.isUndefined(spellOutUnit('v'));
-		})
 	})
 
 	suite('convert method test', function () {
 		const convert = convertHandler.convert;
 
-		// #18
-		test('Convert value correctly', function () {
+		// #11
+		test('Correctly convert gal to L', function () {
 			assert.equal(convert(1.9, 'gal'), 7.19228);
+		});
+
+		// #12
+		test('Correctly convert L to gal', function() {
 			assert.equal(convert(5, 'L'), 1.32086);
+		});
+
+		// #13
+		test('Correctly convert lbs to kg', function() {
 			assert.equal(convert(9.2, 'lbs'), 4.17305);
+		});
+
+		// #14
+		test('Correctly convert kg to lbs', function() {
 			assert.equal(convert(2.112, 'kg'), 4.65617);
+		});
+
+		// #15
+		test('Correctly convert mi to km', function() {
 			assert.equal(convert(8, 'mi'), 12.87472);
+		});
+
+		// #16
+		test('Correctly convert km to mi', function() {
 			assert.equal(convert(5.7, 'km'), 3.54182);
-		})
-	})
-
-	suite('getString method test', function () {
-		const getString = convertHandler.getString;
-
-		// #19
-		test('Get string correctly', function () {
-			assert.equal(getString(1.9, 'gal', 7.192, 'L'),
-				"1.9 gallons converts to 7.192 liters");
-			assert.equal(getString(5, 'L', 1.321, 'gal'),
-				"5 liters converts to 1.321 gallons");
-			assert.equal(getString(9.2, 'lbs', 4.173, 'kg'),
-				"9.2 pounds converts to 4.173 kilograms");
-			assert.equal(getString(2.112, 'kg', 4.656, 'lbs'),
-				"2.112 kilograms converts to 4.656 pounds");
-			assert.equal(getString(8, 'mi', 12.875, 'km'),
-				"8 miles converts to 12.875 kilometers");
-			assert.equal(getString(5.7, 'km', 3.542, 'mi'),
-				"5.7 kilometers converts to 3.542 miles");
 		})
 	})
 })
