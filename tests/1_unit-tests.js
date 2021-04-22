@@ -8,32 +8,26 @@ suite('Unit Tests', function () {
 	suite('getNum test', function () {
 		const getNum = convertHandler.getNum;
 		// #1
-		test('Integer testing', function () {
+		test('convertHandler should correctly read a whole number input.', function () {
 			assert.equal(getNum('2kg'), 2);
 			assert.notEqual(getNum('5gal'), 6);
 		});
 
 		// #2
-		test('Decimal testing', function () {
+		test('convertHandler should correctly read a decimal input number.', function () {
 			assert.equal(getNum('4.2gal'), 4.2);
 			assert.notEqual(getNum('.4mi'), 0.5);
 		})
 
 		// #3
-		test('Fractional testing', function () {
+		test('convertHandler should correctly read a fractional input.', function () {
 			assert.equal(getNum('1/2mi'), 0.5);
 			assert.equal(getNum('2/3lbs'), 0.66667);
 			assert.notEqual(getNum('1/3L'), 0.3);
 		})
 
 		// #4
-		test('Double-fractional error testing', function() {
-			assert.throw(() => getNum('1/2.3/2kg'));
-			assert.throw(() => getNum('3/2.1/1mi'));
-		});
-
-		// #5
-		test('Decimal and fractional testing', function () {
+		test('convertHandler should correctly read a fractional input with a decimal.', function () {
 			assert.equal(getNum('1.2/3gal'), 0.4);
 			assert.equal(getNum('1/0.25L'), 4);
 			assert.equal(getNum('1.25/0.25km'), 5);
@@ -42,8 +36,14 @@ suite('Unit Tests', function () {
 			assert.notEqual(getNum('45.2/1.2mi'), 37.7);
 		})
 
+		// #5
+		test('convertHandler should correctly return an error on a doulbe-fraction(i.e. 3/3/3).', function() {
+			assert.throw(() => getNum('1/2.3/2kg'));
+			assert.throw(() => getNum('3/2.1/1mi'));
+		});
+
 		// #6
-		test('1 as input if no number provided', function () {
+		test('convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.', function () {
 			assert.equal(getNum('kg'), 1);
 			assert.notEqual(getNum('mi'), 0);
 		})
