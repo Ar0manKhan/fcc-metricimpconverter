@@ -53,7 +53,7 @@ suite('Unit Tests', function () {
 		const getUnit = convertHandler.getUnit;
 
 		// #7
-		test('Correctly read each valid unit', function () {
+		test('convertHandler should correctly read each valid input unit.', function () {
 			assert.equal(getUnit('32.4kg'), 'kg');
 			assert.equal(getUnit('5.1lbs'), 'lbs');
 			assert.equal(getUnit('12km'), 'km');
@@ -63,7 +63,7 @@ suite('Unit Tests', function () {
 		});
 
 		// #8
-		test('Correctly throw error for invalid unit', function() {
+		test('convertHandler should correctly return an error for an invalid input unit.', function() {
 			assert.throw(() => getUnit('3gall'));
 			assert.throw(() => getUnit('3 kg mi'));
 		});
@@ -73,7 +73,7 @@ suite('Unit Tests', function () {
 		const getReturnUnit = convertHandler.getReturnUnit;
 
 		// #9
-		test('Return unit for valid units', function () {
+		test('convertHandler should the correct return unit for each valid input unit.', function () {
 			assert.equal(getReturnUnit('mi'), 'km');
 			assert.equal(getReturnUnit('km'), 'mi');
 			assert.equal(getReturnUnit('L'), 'gal');
@@ -87,7 +87,7 @@ suite('Unit Tests', function () {
 		const spellOutUnit = convertHandler.spellOutUnit;
 
 		// #10
-		test('Spell out for valid units', function () {
+		test('convertHandler should correctly return the spelled-out string unit for each valid input unit.', function () {
 			assert.equal(spellOutUnit('kg'), 'kilograms');
 			assert.equal(spellOutUnit('lbs'), 'pounds');
 			assert.equal(spellOutUnit('L'), 'liters');
@@ -101,32 +101,32 @@ suite('Unit Tests', function () {
 		const convert = convertHandler.convert;
 
 		// #11
-		test('Correctly convert gal to L', function () {
+		test('convertHandler should correctly convert gal to L', function () {
 			assert.equal(convert(1.9, 'gal'), 7.19228);
 		});
 
 		// #12
-		test('Correctly convert L to gal', function() {
+		test('convertHandler should correctly convert L to gal', function() {
 			assert.equal(convert(5, 'L'), 1.32086);
 		});
 
 		// #13
-		test('Correctly convert lbs to kg', function() {
+		test('convertHandler should correctly convert lbs to kg', function() {
 			assert.equal(convert(9.2, 'lbs'), 4.17305);
 		});
 
 		// #14
-		test('Correctly convert kg to lbs', function() {
+		test('convertHandler should correctly convert kg to lbs', function() {
 			assert.equal(convert(2.112, 'kg'), 4.65617);
 		});
 
 		// #15
-		test('Correctly convert mi to km', function() {
+		test('convertHandler should correctly convert mi to km', function() {
 			assert.equal(convert(8, 'mi'), 12.87472);
 		});
 
 		// #16
-		test('Correctly convert km to mi', function() {
+		test('convertHandler should correctly convert km to mi', function() {
 			assert.equal(convert(5.7, 'km'), 3.54182);
 		})
 	})
